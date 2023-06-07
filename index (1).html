@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+    background-color: #111; 
+    color: #eee;
+    }
+   button {
+     height: 30px;
+   }
+   input {
+     width: 60px;
+   }
+  </style>
+ </head>
+<body>
+  <h2>Geometria Plana - O Gabarito</h2>
+  <hr>
+  <p><b>Atenção!! as vírgulas (,) são pontos (.) e se alguma conta deu "NaN" suas informações estão erradas!</b>
+  </p>
+  <h3>Pitágoras</h3>
+  <p><i>a² = b² + c²</i></p>
+  <hr>
+  <h3>Trapézio</h3>
+  <p><i>A = ((b.B).h)/2</i></p>
+  <hr>
+  <h3>Área do triângulo</h3>
+  <p>• Com a base e a altura:</p>
+  <p><i>A = (b.h) / 2</i></p>
+  <br>
+  <p>• <b>"Heron"</b> com o perímetro:</p>
+  <p><i>p = (a + b + c) / 2</i></p>
+  <p><i>A = √(p.(p - a).(p - b).(p - c))</i></p>
+  <br>
+  <p>Perímetro <i>a</i>: <input type="number" id="H-a"></p>
+  <p>Perímetro <i>b</i>: <input type="number" id="H-b"></p>
+  <p>Perímetro <i>c</i>: <input type="number" id="H-c"></p>
+  <br>
+  <button onclick="Heron()" type="submit">Calcular</button>
+  <br>
+  <p id="Heron-result">{ Resultado }</p>
+  <br>
+  <p>• Calcular a partir de <b>2 lados e 1 ângulo</b>:</p>
+  <p><i>A = (a * b * sen(c)) / 2</i></p>
+  <br>
+  <p>Lado <i>a</i>: <input type="number" id="S-a"></p>
+  <p>Lado <i>b</i>: <input type="number" id="S-b"></p>
+  <p>Ângulo <i>c</i>: <input type="number" id="S-c"></p>
+  <br>
+  <button onclick="Sen()" type="submit">Calcular</button>
+    <p id="Sen-result">{ Resultado }</p>
+  <hr>
+  <h3>Polegatti</h3>
+  <p>• Área com <b>Lado e Número de Lados:</b></p>
+  <p><i>A = (a² / 4.tan(180 / n).n</i></p>
+  <br>
+  <p>Lado: <input type="number" id="PA-a"></p>
+  <p>N° de lados: <input type="number" id="PA-n"></p>
+  <br>
+  <button onclick="Pgt()" type="submit">Calcular</button>
+  <p id="Pgt-result">{ Resultado }</p>
+  <br>
+  <p>• Lado com <b>Área e Número de Lados</b></p>
+  <p><i>a = 2.√(A.tan(180 / n) / n)</i></p>
+  <br>
+  <p>Área: <input type="number" id="PL-a"></p>
+  <p>N° de lados: <input type="number" id="PL-n"></p>
+  <br>
+  <button onclick="LPgt()" type="submit">Calcular</button>
+  <p id="LPgt-result">{ Resultado }</p>
+  <br><p>Se pedir o perímetro, multiplique o resultado pela quantidade de lados!</p> <p>Círculo = 360 Lados</p><br><hr><br><br>
+  <p>Pentagono (5 lados), 
+  Hexagono (6 lados),
+  Heptagono (7 lados),
+  Octagono (8 lados),
+  Eneagono ou Nonagono (9 lados),
+  Decagono (10 lados),
+  Hendecagono (11 lados),
+  Dodecagono (12 lados),
+  Tridecagono (13 lados),
+  Tetradecagono (14 lados),
+  Pentadecagono (15 lados),
+  Hexadecagono (16 lados),
+  Heptadecagono (17 lados),
+  Octadecagono (18 lados),
+  Eneadecagono (19 lados),
+  Icosagono (20 lados)</p>
+  <br><br>
+  <script>
+const heronInputA = document.getElementById("H-a");
+const heronInputB = document.getElementById("H-b");
+const heronInputC = document.getElementById("H-c");
+const heronResultBox = document.getElementById("Heron-result");
+
+const senInputA = document.getElementById("S-a");
+const senInputB = document.getElementById("S-b");
+const senInputC = document.getElementById("S-c");
+const senResultBox = document.getElementById("Sen-result");
+
+const pgtInputA = document.getElementById("PA-a");
+const pgtInputN = document.getElementById("PA-n");
+const pgtResultBox = document.getElementById("Pgt-result");
+
+const lpgtInputA = document.getElementById("PL-a");
+const lpgtInputN = document.getElementById("PL-n");
+const lpgtResultBox = document.getElementById("LPgt-result");
+
+// Função Heron
+function Heron() {
+  const a = parseFloat(heronInputA.value);
+  const b = parseFloat(heronInputB.value);
+  const c = parseFloat(heronInputC.value);
+
+  const prmt = (a + b + c) / 2;
+  const raizD = prmt * (prmt - a) * (prmt - b) * (prmt - c);
+  const result = Math.sqrt(raizD);
+  
+  heronResultBox.innerHTML = `p = ${prmt * 2}/2 = ${prmt.toFixed(3)} <br><br>A = √${prmt}×${((prmt - a) * (prmt - b) * (prmt - c)).toFixed(3)} <br> A = √${raizD.toFixed(3)} <br> A = ${result.toFixed(3)}`;
+
+}
+
+// Função Sen
+function Sen() {
+  const a = parseFloat(senInputA.value);
+  const b = parseFloat(senInputB.value);
+  const c = parseFloat(senInputC.value);
+
+  const senC = Math.sin((c * Math.PI) / 180);
+  const area = (a * b * senC) / 2;
+
+  senResultBox.innerHTML = `A = ${(a * b)}×${senC.toFixed(3)} / 2 <br> A = ${(area * 2).toFixed(3)} / 2 <br> A = ${area.toFixed(3)}`;
+}
+
+// Função Pgt
+function Pgt() {
+  const a = parseFloat(pgtInputA.value);
+  const n = parseFloat(pgtInputN.value);
+
+  const anguloGraus = 180 / n;
+  const anguloRadianos = anguloGraus * (Math.PI / 180);
+  const tangente = Math.tan(anguloRadianos);
+  const tan4 = 4 * tangente;
+  const result = ((a * a) / tan4) * n;
+
+  pgtResultBox.innerHTML = `A = ((${a * a}) / (4×tan(${anguloGraus.toFixed(3)}))×${n} <br> A = (${a * a} / ${tan4.toFixed(3)})×${n} <br> A = ${((a * a) / tan4).toFixed(3)}×${n} <br> A = ${result.toFixed(3)}`;
+}
+
+// Função LPgt
+function LPgt() {
+  const A = parseFloat(lpgtInputA.value);
+  const n = parseFloat(lpgtInputN.value);
+
+  const anguloGraus = 180 / n;
+  const anguloRadianos = anguloGraus * (Math.PI / 180);
+  const tangente = Math.tan(anguloRadianos);
+  const areaTan = A * tangente;
+  const areaN = areaTan / n;
+  const raiz = Math.sqrt(areaN);
+  const result = 2 * raiz;
+
+  lpgtResultBox.innerHTML = `a = 2×√(${A}×tan(${anguloGraus.toFixed(3)}))/${n} <br> a = 2×√(${areaTan.toFixed(3)})/${n} <br> a = 2×√${areaN.toFixed(3)} <br> a = 2×${raiz.toFixed(3)} <br> a = ${result.toFixed(3)}`;
+}
+  </script>
+</body>
+</html>
